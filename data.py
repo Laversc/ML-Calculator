@@ -7,10 +7,13 @@ import pathlib
 def get_mnist():
     with np.load(f"{pathlib.Path(__file__).parent.absolute()}/mnist.npz") as f:
         images, labels = f["x_train"], f["y_train"]
+        
     
+    #Resize the images down to 28*28 = 784 pixles
     images = images.astype("float32") / 255
     images = np.reshape(images, (images.shape[0], images.shape[1] * images.shape[2]))
     labels = np.eye(10)[labels]
+    print(np.shape(images))
     return images, labels
 
 
